@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 아래 configuration이 어떤 것을 참고하고 있냐 하는 설정 -->
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- mybatis로 넘어오는 parameter가 null인 경우, jdbcType을 Setting -->
+	<!-- value="NULL" 을 넣을시 꼭 대문자 사용 -->
+  	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />    
+	</settings>
+</configuration>

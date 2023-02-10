@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+   xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+      http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+   
+   <!-- Root Context: defines shared resources visible to all other web components -->
+   <bean class="model.CafeMocha">
+      <property name="name" value="카페모카"/>
+      <property name="price" value="3500"/>
+   </bean>
+   
+   <!-- 여기서 id="config"로 등록한 것이 -->
+   <bean id="config" class="com.zaxxer.hikari.HikariConfig">
+      <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+      <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"/>
+      <property name="username" value="hr"/>
+      <property name="password" value="1234"/>
+   </bean>
+    
+   <!-- 여기서 ref="config"이렇게 설정하여 사용할 수 있다 -->
+   <bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
+      <constructor-arg ref="config"/>
+   </bean>
+   
+   <!-- db와 연결된 연결체 : sqlSessionFatory / sqlSession에 쿼리문을 전달하면 알아서 연결해서 데이터를 갖고 옴(=이게 mybatis의 능력) -->
+   <bean id="sqlSessionFatory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="ds"/>
+      <property name="configLocation" value="classpath:/mybatis-config-base.xml"/>
+   </bean>
+   
+   <!-- con.ezen.springdb.mapper에 mapper들을 넣어놨으니 해당 mapper를 스캔해주세요 하는 설정 -->
+   <mybatis-spring:scan base-package="com.ezen.springdb.mapper"/>
+   <mybatis-spring:scan base-package="com.ezen.springdb.board.mapper"/>
+</beans>
