@@ -6,10 +6,7 @@
       http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
    
    <!-- Root Context: defines shared resources visible to all other web components -->
-   <bean class="model.CafeMocha">
-      <property name="name" value="카페모카"/>
-      <property name="price" value="3500"/>
-   </bean>
+
    
    <!-- 여기서 id="config"로 등록한 것이 -->
    <bean id="config" class="com.zaxxer.hikari.HikariConfig">
